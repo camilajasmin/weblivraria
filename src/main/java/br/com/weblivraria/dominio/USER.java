@@ -1,7 +1,7 @@
 package br.com.weblivraria.dominio;
 
 public class USER {
-	private Integer idContato;
+	private Integer IDUser;
 	private String Nomeuser;
 	private String SENHAuser;
 	private String EMAILuser;
@@ -11,10 +11,10 @@ public class USER {
 	
 	
 	public Integer getIdContato() {
-		return idContato;
+		return IDUser;
 	}
 	public void setIdContato(Integer idContato) {
-		this.idContato = idContato;
+		this.IDUser = idContato;
 	}
 	public String getNomeuser() {
 		return Nomeuser;
@@ -51,6 +51,10 @@ public class USER {
 	}
 	public void setCPFuser(String cPFuser) {
 		CPFuser = cPFuser;
+	}
+	public void setIDUser(int int1) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
