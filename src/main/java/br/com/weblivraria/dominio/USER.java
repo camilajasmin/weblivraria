@@ -10,11 +10,11 @@ public class USER {
 	private String CPFuser;
 	
 	
-	public Integer getIdContato() {
+	public Integer getIDUser() {
 		return IDUser;
 	}
-	public void setIdContato(Integer idContato) {
-		this.IDUser = idContato;
+	public void setIDuser(Integer idUser) {
+		this.IDUser = idUser;
 	}
 	public String getNomeuser() {
 		return Nomeuser;
@@ -52,10 +52,5 @@ public class USER {
 	public void setCPFuser(String cPFuser) {
 		CPFuser = cPFuser;
 	}
-	public void setIDUser(int int1) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 }

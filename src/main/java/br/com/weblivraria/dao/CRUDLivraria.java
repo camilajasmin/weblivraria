@@ -7,5 +7,6 @@ public interface CRUDLivraria<T> {
 	List<T> listar();
 	T pesquisar(T dados);
 	T atualizar(T dados);
+	T apagar(T dados);
 	
 }

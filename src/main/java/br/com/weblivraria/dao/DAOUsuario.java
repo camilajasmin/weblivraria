@@ -75,7 +75,7 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 				
 				while(rs.next()) {
 					USER us = new USER();
-					us.setIDUser(rs.getInt(0));
+					us.setIDuser(rs.getInt(0));
 					us.setNomeuser(rs.getString(1));
 					us.setSENHAuser(rs.getString(2));
 					us.setEMAILuser(rs.getString(3));
@@ -116,7 +116,7 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 				
 				while(rs.next()) {
 					
-					us.setIDUser(rs.getInt(0));
+					us.setIDuser(rs.getInt(0));
 					us.setNomeuser(rs.getString(1));
 					us.setSENHAuser(rs.getString(2));
 					us.setEMAILuser(rs.getString(3));
@@ -162,7 +162,7 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 				
 				while(rs.next()) {
 					USER us = new USER();
-					us.setIDUser(rs.getInt(0));
+					us.setIDuser(rs.getInt(0));
 					us.setNomeuser(rs.getString(1));
 					us.setSENHAuser(rs.getString(2));
 					us.setEMAILuser(rs.getString(3));
@@ -198,22 +198,19 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 		
 		try{
 			if(abrirConexao()) {
-				String sql = "Select * from USER where IDUSER=?";
+				String sql = "Select NOMEuser, SENHAuser, EMAILuser, CPFuser from USER where IDUser=?,SENHAuser=?,EMAILuser=?,CPFuser=?";
 				pst = con.prepareStatement(sql);
+				pst.setString(1, dados.getNomeuser());
+				pst.setString(2, dados.getSENHAuser());
+				pst.setString(3, dados.getEMAILuser());
+				pst.setString(4, dados.getCPFuser());
+				
 				rs = pst.executeQuery();
 				
-				while(rs.next()) {
-					
-					us.setIDUser(rs.getInt(0));
-					us.setNomeuser(rs.getString(1));
-					us.setSENHAuser(rs.getString(2));
-					us.setEMAILuser(rs.getString(3));
-					us.setTELEFONEuser(rs.getString(4));
-					us.setNOMECOMPLETOuser(rs.getString(5));
-					us.setCPFuser(rs.getString(6));
-					
-					
-				}}
+				if(!rs.next()) {
+					auth = false;
+					}
+				}
 				else {
 					throw new Exception("Não foi possível estabelecer a conexão com o banco");
 				}
@@ -229,16 +226,39 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 		}
 		
 		
-		return false;
+		return auth;
 	}
 
 	@Override
 	public String alterarSenha(USER dados) {
+		String msg = "";
+		
+		try{
+			if(abrirConexao()) {
+				String sql = "Select NOMEuser, SENHAuser, EMAILuser, CPFuser from USER where IDUser=?,SENHAuser=?,EMAILuser=?,CPFuser=?";
+				pst = con.prepareStatement(sql);
+				pst.setString(1, dados.getNomeuser());
+				pst.setString(2, dados.getSENHAuser());
+			}
+		}
+			catch(SQLException se){
+				new Exception("Erro na Consulta"+se.getMessage());
+			}
+			catch(Exception e ) {
+				new Exception("Erro Inesperado"+e.getMessage());
+			}
+			finally {
+				fecharConexao();
+			}
+			
 		return null;
 	}
-	
 
-}
+	@Override
+	public USER apagar(USER dados) {
+		// TODO Auto-generated method stub
+		return null;
+	}}
 
 
 

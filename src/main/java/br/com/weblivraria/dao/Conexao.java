@@ -24,7 +24,7 @@ public abstract class Conexao {
 		
 		try { 
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3784", "root", "1234.abcd");
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3784/LIVRARIADB", "root", "1234.abcd");
 			
 		}
 		catch(ClassNotFoundException | IllegalAccessException | InstantiationException e) {
