@@ -75,13 +75,13 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 				
 				while(rs.next()) {
 					USER us = new USER();
-					us.setIDuser(rs.getInt(0));
-					us.setNomeuser(rs.getString(1));
-					us.setSENHAuser(rs.getString(2));
-					us.setEMAILuser(rs.getString(3));
-					us.setTELEFONEuser(rs.getString(4));
-					us.setNOMECOMPLETOuser(rs.getString(5));
-					us.setCPFuser(rs.getString(6));
+					us.setIDuser(rs.getInt(1));
+					us.setNomeuser(rs.getString(2));
+					us.setSENHAuser(rs.getString(3));
+					us.setEMAILuser(rs.getString(4));
+					us.setTELEFONEuser(rs.getString(5));
+					us.setNOMECOMPLETOuser(rs.getString(6));
+					us.setCPFuser(rs.getString(7));
 					
 					lista.add(us);
 					
@@ -110,19 +110,19 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 		
 		try{
 			if(abrirConexao()) {
-				String sql = "Select * from USER where IDUSER=?";
+				String sql = "Select * from USER where IDUser=?";
 				pst = con.prepareStatement(sql);
 				rs = pst.executeQuery();
 				
-				while(rs.next()) {
+				if(rs.next()) {
 					
-					us.setIDuser(rs.getInt(0));
-					us.setNomeuser(rs.getString(1));
-					us.setSENHAuser(rs.getString(2));
-					us.setEMAILuser(rs.getString(3));
-					us.setTELEFONEuser(rs.getString(4));
-					us.setNOMECOMPLETOuser(rs.getString(5));
-					us.setCPFuser(rs.getString(6));
+					us.setIDuser(rs.getInt(1));
+					us.setNomeuser(rs.getString(2));
+					us.setSENHAuser(rs.getString(3));
+					us.setEMAILuser(rs.getString(4));
+					us.setTELEFONEuser(rs.getString(5));
+					us.setNOMECOMPLETOuser(rs.getString(6));
+					us.setCPFuser(rs.getString(7));
 					
 					
 				}}
@@ -144,52 +144,53 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 	}
 
 	@Override
-	public USER atualizar(USER dados) {
-    List<USER> lista = new ArrayList<USER>();
-		
-		try{
+	public String atualizar(USER dados) {
+		String msg = "";
+		//vamos tentar atualizar o usuário e caso dê erro, este será
+		//capturado e tratado
+		try {
+			//verificar se a conexão com o banco de dados foi aberta ou não
+			//caso tenha sido aberta, iremos executar os comandos de sql
+			//para cadastrar o usuario. Senão, iremos exibir uma mensagem 
+			//para o usuário de que não foi possível estabelecer comunicação
+			//com o banco de dados
 			if(abrirConexao()) {
-				String sql = "Select * from USER";
+				String sql = "update usuario set NOMEuser=?,EMAILuser=?,TELEFONEuser=?,NOMECOMPLETOuser=? where IDUse=?";
+				//preparar a consulta para ser executada
 				pst = con.prepareStatement(sql);
-				rs = pst.executeQuery();
+				//passagem dos dados aos parâmetros da consulta, ou seja, 
+				//cada ponto de interrogação irá receber um dado correspondente 
+				//a um campo da tabela
+				pst.setString(1,dados.getNomeuser());
+				pst.setString(2, dados.getEMAILuser());
+				pst.setString(3,dados.getTELEFONEuser());
+				pst.setString(4, dados.getNOMECOMPLETOuser());
+				pst.setInt(5, dados.getIDUser());
 				
-				/*
-				 *  O comando acima faz com que o resultado da consulta(select) serja atribuído ao rs(ResultSet).
-				 *  Ele recebe todos os dados, mas não de forma organizada.
-				 *  Para criar a lista de usuário, nós aplicamos o comando while para verificar se há conteúdo 
-				 *  em rs, em caso afirmativo passamos os dados para um novo objeto usuário e depois adicionamos 
-				 *  a uma lista de novos usuarios. Esta lista será retornada con todos os usuarios do banco*/
-				
-				while(rs.next()) {
-					USER us = new USER();
-					us.setIDuser(rs.getInt(0));
-					us.setNomeuser(rs.getString(1));
-					us.setSENHAuser(rs.getString(2));
-					us.setEMAILuser(rs.getString(3));
-					us.setTELEFONEuser(rs.getString(4));
-					us.setNOMECOMPLETOuser(rs.getString(5));
-					us.setCPFuser(rs.getString(6));
-					
-					lista.add(us);
-					
-					
-				}}
+				//executar a consulta e verificar se o retorno da execução
+				//é maior que 0(zero)
+				if(pst.executeUpdate() > 0) {
+					msg = "Atualização realizada";
+				}
 				else {
-					throw new Exception("Não foi possível estabelecer a conexão com o banco");
+					msg = "Não foi possível atualizar";
 				}
 			}
-		catch(SQLException se){
-			new Exception("Erro na Consulta"+se.getMessage());
+			else {
+				msg = "Não foi possível estabelecer a conexão com o banco de dados";
+			}
 		}
-		catch(Exception e ) {
-			new Exception("Erro Inesperado"+e.getMessage());
+		catch(SQLException se) {
+			msg = "Erro ao atualizar. "+se.getMessage();
+		}
+		catch(Exception e) {
+			msg = "Erro inesperado. "+e.getMessage();
 		}
 		finally {
 			fecharConexao();
 		}
 		
-		
-		return null;
+		return msg;
 	}
 
 	@Override
@@ -216,9 +217,11 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 				}
 			}
 		catch(SQLException se){
+			auth = false;
 			new Exception("Erro na Consulta"+se.getMessage());
 		}
 		catch(Exception e ) {
+			auth = false;
 			new Exception("Erro Inesperado"+e.getMessage());
 		}
 		finally {
@@ -232,33 +235,100 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 	@Override
 	public String alterarSenha(USER dados) {
 		String msg = "";
-		
-		try{
+		//vamos tentar atualizar o usuário e caso dê erro, este será
+		//capturado e tratado
+		try {
+			//verificar se a conexão com o banco de dados foi aberta ou não
+			//caso tenha sido aberta, iremos executar os comandos de sql
+			//para atualizar o usuario. Senão, iremos exibir uma mensagem 
+			//para o usuário de que não foi possível estabelecer comunicação
+			//com o banco de dados
 			if(abrirConexao()) {
-				String sql = "Select NOMEuser, SENHAuser, EMAILuser, CPFuser from USER where IDUser=?,SENHAuser=?,EMAILuser=?,CPFuser=?";
+				String sql = "update usuario set senha=? where idusuario=?";
+				//preparar a consulta para ser executada
 				pst = con.prepareStatement(sql);
-				pst.setString(1, dados.getNomeuser());
-				pst.setString(2, dados.getSENHAuser());
+				//passagem dos dados aos parâmetros da consulta, ou seja, 
+				//cada ponto de interrogação irá receber um dado correspondente 
+				//a um campo da tabela
+				pst.setString(1,dados.getSENHAuser());
+				pst.setInt(2, dados.getIDUser());
+				
+				//executar a consulta e verificar se o retorno da execução
+				//é maior que 0(zero)
+				if(pst.executeUpdate() > 0) {
+					msg = "Atualização realizada";
+				}
+				else {
+					msg = "Não foi possível atualizar";
+				}
+			}
+			else {
+				msg = "Não foi possível estabelecer a conexão com o banco de dados";
 			}
 		}
-			catch(SQLException se){
-				new Exception("Erro na Consulta"+se.getMessage());
-			}
-			catch(Exception e ) {
-				new Exception("Erro Inesperado"+e.getMessage());
-			}
-			finally {
-				fecharConexao();
-			}
-			
-		return null;
+		catch(SQLException se) {
+			msg = "Erro ao atualizar. "+se.getMessage();
+		}
+		catch(Exception e) {
+			msg = "Erro inesperado. "+e.getMessage();
+		}
+		finally {
+			fecharConexao();
+		}
+		
+		return msg;
 	}
 
 	@Override
-	public USER apagar(USER dados) {
-		// TODO Auto-generated method stub
-		return null;
-	}}
+	public String apagar(Integer id) {
+		String msg = "";
+		//vamos tentar deletar o usuário e caso dê erro, este será
+		//capturado e tratado
+		try {
+			//verificar se a conexão com o banco de dados foi aberta ou não
+			//caso tenha sido aberta, iremos executar os comandos de sql
+			//para deletar o usuario. Senão, iremos exibir uma mensagem 
+			//para o usuário de que não foi possível estabelecer comunicação
+			//com o banco de dados
+			if(abrirConexao()) {
+				String sql = "delete from USER where IDUser=?";
+				//preparar a consulta para ser executada
+				pst = con.prepareStatement(sql);
+				//passagem dos dados aos parâmetros da consulta, ou seja, 
+				//cada ponto de interrogação irá receber um dado correspondente 
+				//a um campo da tabela
+				pst.setInt(1,id);				
+				
+				//executar a consulta e verificar se o retorno da execução
+				//é maior que 0(zero)
+				if(pst.executeUpdate() > 0) {
+					msg = "Usuário apagado";
+				}
+				else {
+					msg = "Não foi possível apagar";
+				}
+			}
+			else {
+				msg = "Não foi possível estabelecer a conexão com o banco de dados";
+			}
+		}
+		catch(SQLException se) {
+			msg = "Erro ao apagar. "+se.getMessage();
+		}
+		catch(Exception e) {
+			msg = "Erro inesperado. "+e.getMessage();
+		}
+		finally {
+			fecharConexao();
+		}
+		
+		return msg;
+	}
+
+	
+
+	}
+	
 
 
 

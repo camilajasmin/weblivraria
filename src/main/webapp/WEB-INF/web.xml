@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>WebLivraria</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -9,4 +9,44 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>ServiceUser</display-name>
+    <servlet-name>ServiceUser</servlet-name>
+    <servlet-class>br.com.weblivraria.services.ServiceUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServiceUser</servlet-name>
+    <url-pattern>/ServiceUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServiceLogin</display-name>
+    <servlet-name>ServiceLogin</servlet-name>
+    <servlet-class>br.com.weblivraria.services.ServiceLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServiceLogin</servlet-name>
+    <url-pattern>/ServiceLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Home</display-name>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>br.com.weblivraria.pages.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServiceLivro</display-name>
+    <servlet-name>ServiceLivro</servlet-name>
+    <servlet-class>br.com.weblivraria.services.ServiceLivro</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServiceLivro</servlet-name>
+    <url-pattern>/ServiceLivro</url-pattern>
+  </servlet-mapping>
 </web-app>

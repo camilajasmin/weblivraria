@@ -2,7 +2,7 @@ package br.com.weblivraria.dominio;
 
 public class USER {
 	private Integer IDUser;
-	private String Nomeuser;
+	private String NOMEuser;
 	private String SENHAuser;
 	private String EMAILuser;
 	private String TELEFONEuser;
@@ -17,10 +17,10 @@ public class USER {
 		this.IDUser = idUser;
 	}
 	public String getNomeuser() {
-		return Nomeuser;
+		return NOMEuser;
 	}
 	public void setNomeuser(String nomeuser) {
-		Nomeuser = nomeuser;
+		NOMEuser = nomeuser;
 	}
 	public String getSENHAuser() {
 		return SENHAuser;

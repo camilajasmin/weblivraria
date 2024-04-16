@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /**/
+        body{
+            text-align: center;
+            background-color: bisque;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+        }
+        form{
+            width: 20%;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        label{
+            font-family: verdana;
+            font-size: 11px;
+            font-weight: bold;
+            display: block;
+            text-align: left;
+        }
+        input{
+            width: 100%;
+            padding: 8px;
+            display: block;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: antiquewhite;
+        }
+        input[type=submit]{
+            color: antiquewhite;
+            background-color: rgb(129, 71, 44);
+            border-radius: 7px;
+            width: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+        }
+        a{
+            font-family: verdana;
+            text-decoration: none;
+            color: chocolate;
+            font-size: 10pt;
+            text-transform: uppercase;
+            border: 2pt;
+        }
+    </style>
+</head>
+<body>
+    <img src="userIcon.png" alt="">
+    <form action="ServiceLogin" method="post">
+        <label>Usuário:</label>
+        <input type="text" name="txtUsuario" required>
+
+        <label>Senha:</label>
+        <input type="password" name="txtSenha" required>
+
+        <input type="submit" value="Logar">
+        <a href="cadastroUser.html">Cadastrar</a>
+    </form>
+</body>
+</html>

@@ -14,7 +14,7 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 		String msg = "";
 		try {
 			if(abrirConexao()) {
-				String sql = "insert into livro(titulo,genero,sinopse,autor,preco,capa)values(?,?,?,?,?,?)";
+				String sql = "insert into LIVRO(TITULOlivro,GENEROlivro,SINOPSElivro,AUTORlivro,PRECOlivro,CAPAlivro)values(?,?,?,?,?,?)";
 				//Preparar a consulta para a execução
 				pst= con.prepareStatement(sql);
 				//Passagem dos parâmetros para a consulta
@@ -139,7 +139,7 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 
 
 	@Override
-	public LIVRO atualizar(LIVRO dados) {
+	public String atualizar(LIVRO dados) {
 		String msg = "";
 		try {
 			if(abrirConexao()) {
@@ -183,7 +183,7 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 	}
 
 	@Override
-	public LIVRO apagar(LIVRO dados) {
+	public String apagar(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+    }
+    header{
+        background-color: #cdc2b7  ;
+        color: white;
+        font-family: verdana;
+    }
+    #areaUsuario{
+        padding: 10px;
+        border-bottom: 1px solid white ;
+        display: flex;
+        justify-content: space-between;
+        color: #3d545b ;
+    }
+
+    #areaPesquisa{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        border-bottom: 1px solid white ;
+    }
+    form{
+        background-color: white;
+        padding: 10px;
+        margin-left: 50px;
+        margin-right:50px ;
+    }
+    input[type=text]{
+        width: 500px;
+        padding: 5px;
+        border: 0px;
+        outline: none;
+    }
+    input[type=submit]{
+        background-color: cornflowerblue;
+        color: white;
+        border: none;
+        font-size: 10px;
+        padding: 5px;
+    }
+    #carrinho {
+        background-color: white;
+        padding: 10px;
+        color: black !important;
+    }
+    #carrinho img{
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    #areaMenu{
+        text-align: center;
+        align-items: center;
+    }
+    #areaMenu a{
+        text-decoration: none;
+        margin-left: 10px;
+        margin-right: 10px;
+        color: #3d545b;
+        font-size: 15px;
+    }
+    #areaMenu a:hover{
+        color: white;
+    }
+    #copy{
+        text-align: center;
+        font-family: verdana;
+        color: #5e35b1;
+        border-radius: 5px;
+        
+    }
+    footer{
+        background-color: #cdc2b7;
+        font-family: Verdana;
+        justify-content: space-between;
+    }
+    #footer{
+        font-size: 12px;
+        
+        
+    }
+    h2{
+        font-family: verdana;
+        font-size: 12px;
+    }
+    #footer img{
+        width: 18px;
+        height: 18px;
+    }
+    #genero a{
+        font-family: verdana;
+        font-size: 12px;
+        text-decoration: none;
+        display: block;
+    }
+    content{
+        text-align: center;
+    }
+    content form{
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        }
+    content form label{
+        font-family: verdana;
+        font-size: 15px;
+        display: block;
+        font-weight: bold;
+        
+
+    }
+    content form input{
+        border-bottom: 1px solid black !important;
+        margin-bottom: 10px;
+       
+    }
+    content form select{
+        width: 50%;
+        padding: 10px;
+        border-bottom: 1px solid silver;
+        margin-bottom: 10px;
+    }
+    content form input[type=submit]{
+        width: 30%;
+        background-color: gold;
+        color: black;
+        font-size: 12px;
+        font-weight:bold;
+    }
+    .titulo {
+		font-family: verdana;
+		font-size: 20pt;
+		text-align: center;
+		margin-top: 30px;
+		font-weight:bold;
+	}
+</style>
+<body>
+    <header>
+        <div id="areaUsuario">
+            <div id="localizacao">
+                <img src="pinLocation.png" width="25px" height="26px">
+                Localização da Loja
+            </div>
+            <div id="usuario">
+                <img src="loginIcon.png" width="20px" height="20px">
+                Logar/Cadastrar
+            </div>
+        </div>
+
+        <div id="areaPesquisa">
+            <img src="logoicon.png" width="150px" height="90px">
+
+            <form action="ServiceSearch" method="get">
+                <img src="lupaIcon.png" width="16px" height="16px">
+                <input type="text" placeholder="Pesquise seu livro aqui!">
+                <input type="submit" value="BUSCAR">
+            </form>
+            <div id="carrinho" class="carrinho"><img src="carrinho.png">R$ 0,00</div>
+            
+        </div>
+        <div id="areaMenu">
+            <nav>
+                <a href="HOME">
+                    HOME
+                </a>
+                <a href="#">
+                    AVENTURA
+                </a>
+                <a href="#">
+                    TERROR
+                </a>
+                <a href="#">
+                    FANTASIA
+                </a>
+                <a href="#">
+                    ROMANCE
+                </a>
+                <a href="#">
+                    SUSPENSE
+                </a>
+                <a href="#">
+                    DRAMA   
+                </a>
+                <a href="#">
+                    AÇÃO
+                </a>
+            </nav>
+        </div>
+
+
+
+
+    </header>
+
+
+    <content>
+        <div id="painel"><img src="painel2.png" width="100%"></div>
+        
+            <h3 class="titulo">Livro cadastrado com sucesso!</h3>
+            
+            
+    </content>
+
+    <footer>
+        <div id="footer">
+            <div id="contato">
+                <h2>Entre em contato conosco</h2>
+                <a href="https://wa.me/5511982108134"><img src="logowpp.png" alt="(11) 982108134"><br>
+                </a> (11) 94040-0492 | 93445-3223 <br>
+                Av. Paulo Rodrigues, 233 - Jardim Label - São Paulo - SP <br>
+                
+            </div>
+
+            </div>
+            <div id="genero">
+                <h2>Generos</h2>
+                <nav>
+                    <a href="#">HOME</a>
+                    <a href="#">Romance</a>
+                    <a href="#">Aventura</a>
+                    <a href="#">Terror</a>
+                    <a href="#">Fantasia</a>
+                    <a href="#">Suspense</a>
+                    <a href="#">Drama</a>
+                    <a href="#">Açao</a>
+                </nav>
+            </div>
+        </div>
+        <div id="copy">
+            ©Todos os direitos reservados a | design by <a href="https://github.com/camilajasmin">Camila Jasmin</a></div>
+    </footer>
+</body>
+</html>
