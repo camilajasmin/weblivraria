@@ -70,13 +70,13 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 				
 				while(rs.next()) {
 					LIVRO liv = new LIVRO();
-					liv.setIDlivro(rs.getInt(0));
-					liv.setTITULOlivro(rs.getString(1));
-					liv.setGENEROlivro(rs.getString(2));
-					liv.setSINOPSElivro(rs.getString(3));
-					liv.setAUTORlivro(rs.getString(4));
-					liv.setPRECOlivro(rs.getDouble(5));
-					liv.setCAPAlivro(rs.getString(6));
+					liv.setIDlivro(rs.getInt(1));
+					liv.setTITULOlivro(rs.getString(2));
+					liv.setGENEROlivro(rs.getString(3));
+					liv.setSINOPSElivro(rs.getString(4));
+					liv.setAUTORlivro(rs.getString(5));
+					liv.setPRECOlivro(rs.getDouble(6));
+					liv.setCAPAlivro(rs.getString(7));
 					
 					lista.add(liv);
 					
@@ -98,9 +98,10 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 		LIVRO liv = null;
 		try{
 			if(abrirConexao()) {
-				String sql = "Select * from LIVRO where IDlivro = ? or where TITULOlivro = ?";
+				String sql = "Select * from LIVRO where IDlivro = ? or TITULOlivro = ?";
 				pst = con.prepareStatement(sql);
 				pst.setInt(1, dados.getIDlivro());
+				pst.setString(2, dados.getTITULOlivro());
 				
 				rs = pst.executeQuery();
 				
@@ -115,13 +116,13 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 				
 				if(rs.next()) {
 					liv = new LIVRO();
-					liv.setIDlivro(rs.getInt(0));
-					liv.setTITULOlivro(rs.getString(1));
-					liv.setGENEROlivro(rs.getString(2));
-					liv.setSINOPSElivro(rs.getString(3));
-					liv.setAUTORlivro(rs.getString(4));
-					liv.setPRECOlivro(rs.getDouble(5));
-					liv.setCAPAlivro(rs.getString(6));
+					liv.setIDlivro(rs.getInt(1));
+					liv.setTITULOlivro(rs.getString(2));
+					liv.setGENEROlivro(rs.getString(3));
+					liv.setSINOPSElivro(rs.getString(4));
+					liv.setAUTORlivro(rs.getString(5));
+					liv.setPRECOlivro(rs.getDouble(6));
+					liv.setCAPAlivro(rs.getString(7));
 					
 					
 					
@@ -131,9 +132,16 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 					 new Exception("Não foi possível estabelecer a conexão com o banco");
 				}
 		}
-		catch(Exception se) {
-			new Exception ("Erro na consulta");
-		 }
+		catch(SQLException se) {
+			new Exception("Erro na consulta "+se.getMessage());
+		}
+		catch(Exception e) {
+			new Exception("Erro inesperado. "+e.getMessage());
+		}
+		finally {
+			fecharConexao();
+		}
+		
 		return liv;
 		}
 
@@ -143,7 +151,7 @@ public class DAOlivro extends Conexao implements CRUDLivraria<LIVRO> {
 		String msg = "";
 		try {
 			if(abrirConexao()) {
-				String sql = "update livro set titulo=?,genero=?,sinopse=?,autor,preco=?,capa=? where IDlivro=?";
+				String sql = "update livro set titulo=?,genero=?,sinopse=?,autor=?,preco=?,capa=? where IDlivro=?";
 				
 				//Preparar a consulta para a execução
 				pst= con.prepareStatement(sql);

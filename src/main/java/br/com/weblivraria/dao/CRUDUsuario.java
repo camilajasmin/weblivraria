@@ -1,4 +1,3 @@
-
 package br.com.weblivraria.dao;
  
 public interface CRUDUsuario <T> extends CRUDLivraria<T>{

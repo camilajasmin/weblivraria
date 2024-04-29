@@ -3,76 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuários Cadastrados</title>
+    <title>Login</title>
     <style>
-        h1{
-            font-family: arial;
+        /**/
+        body{
             text-align: center;
+            background-color: bisque;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+            margin: 20px;
+        }
+        form{
+            width: 20%;
+            margin-left: auto;
+            margin-right: auto;
 
         }
-        h2{
-            font-size: 14px;
+        label{
+            font-family: verdana;
+            font-size: 11px;
+            font-weight: bold;
+            display: block;
+            text-align: left;
         }
-        .dp img{
-            width: 16px;
-            height: 16px;
+        input{
+            width: 100%;
+            padding: 8px;
+            display: block;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: antiquewhite;
         }
-        .dp {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
+        input[type=submit]{
+            color: antiquewhite;
+            background-color: rgb(129, 71, 44);
+            border-radius: 7px;
+            width: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
         }
-        .dc img{
-            height: 15px;
-            width: 15px;
-            display: flex;
-            align-items: center;
-        }
-        .dc div{
-            font-size: 12px;
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-
-        }
-       
-        .us {
-            background-color: lightpink;
-            padding: 10px;
-            border-radius: 10px;
-            height: 80px;
-            width: 250px;
-            transition: ease 0.5s;
-        }
-        .us:hover{
-            box-shadow: 0px 0px 5px black;
-        }
-        #estrutura{
-            width: 650px;
-            margin-top: 20px;
-            margin-left: 50px;
-            
+        a{
+            font-family: verdana;
+            text-decoration: none;
+            color: chocolate;
+            font-size: 10pt;
+            text-transform: uppercase;
+            border: 2pt;
         }
     </style>
 </head>
 <body>
-        <h1>Usuários Cadastrados</h1>
-        <div id="estrutura">
+    <img src="userIcon.png" alt="">
+    <form action="ServiceLogin" method="post">
+        <label>Usuário:</label>
+        <input type="text" name="txtUsuario" required>
 
-            <div class="us">
-                <div class="dp">
-                    <img src="userIcon.png" alt="">
-                    <h2>Samantha Oliveira</h2>
-                    <a href="atualizar.html">
-                        <img src="editIcon.png" alt="">
-                    </a>
-                </div>
-                <div class="dc">
-                    <div><img src="phoneIcon.png" > (11)93833-9994</div>
-                    <div><img src="mail.png" > samantha.ssm@outlook.com</div>
-                </div>
-            </div>
+        <label>Senha:</label>
+        <input type="password" name="txtSenha" required>
 
-        </div>
+        <input type="submit" value="Logar">
+        <a href="cadastroUser.html">Cadastrar</a>
+    </form>
 </body>
 </html>

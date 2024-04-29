@@ -44,7 +44,7 @@ public class ServiceLogin extends HttpServlet {
 		
 		DAOUsuario daous = new DAOUsuario();
 		if (daous.login(us)) {
-			response.sendRedirect("index.html");
+			response.sendRedirect("Home");
 		}else {
 			response.sendRedirect("erro.html");
 		}

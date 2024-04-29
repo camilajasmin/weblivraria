@@ -1,24 +1,25 @@
-package br.com.weblivraria.pages;
+package br.com.weblivraria.services;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import br.com.weblivraria.dao.DAOlivro;
 import br.com.weblivraria.dominio.LIVRO;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.annotation.WebServlet;
+
 /**
- * Servlet implementation class Home
+ * Servlet implementation class ServicePagamento
  */
-public class Home extends HttpServlet {
+public class ServicePagamento extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Home() {
+    public ServicePagamento() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,13 +28,14 @@ public class Home extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String pagina ="<!DOCTYPE html>\r\n"
 				+ "<html lang=\"pt-br\">\r\n"
 				+ "<head>\r\n"
 				+ "    <meta charset=\"UTF-8\">\r\n"
 				+ "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n"
 				+ "    <title>Document</title>\r\n"
-				+ "</head>\r\n"
+				
 				+ "<style>\r\n"
 				+ "    body{\r\n"
 				+ "        margin: 0px;\r\n"
@@ -133,47 +135,55 @@ public class Home extends HttpServlet {
 				+ "        text-decoration: none;\r\n"
 				+ "        display: block;\r\n"
 				+ "    }\r\n"
-				+ "    content{\r\n"
-				+ "        text-align: center;\r\n"
-				+ "        display:block;\r\n"
-				+ "    }\r\n"
-			    +"    #listalivros{\r\n"
-			    + "        display: flex;        \r\n"
-			    + "        flex-wrap: wrap;\r\n"
-			    + "        width: 1000px;\r\n"
-			    + "        height: 100%\r\n"
-			    + "        margin-left: auto;\r\n"
-			    + "        margin-right: auto;\r\n"
-			    + "        justify-content: center ;\r\n"
-			    + "   }\r\n"
-			    + "\r\n"
-			    + "   .livro{\r\n"
-			    + "        width: 50%;\r\n"
-			    + "        border: 1px solid silver;\r\n"
-			    + "        padding: 15px;\r\n"
-			    + "\r\n"
-			    + "        }   \r\n"
-			    + "\r\n"
-			    + "    .livro img{\r\n"
-			    + "        width: 100%;\r\n"
-			    + "\r\n"
-			    + "        }\r\n"
-			    + "\r\n"
-			    + "    .livro h4{\r\n"
-			    + "        font-family: candara;\r\n"
-			    + "        font-size: 14pt;\r\n"
-			    + "    }\r\n"
-			    + "\r\n"
-			    + "    .livro p{\r\n"
-			    + "        font-family: candara;\r\n"
-			    + "        font-size: 15px;\r\n"
-			    + "    }"
-				+ "    #listalivros a{"
-				+ "		width:20%;"
-				+ "		text-decoration: none;"
-				+ "		color: black;"
+				+ "    .pagamento{"
+				+ "        display:flex !important;"
+				+ "        margin:30px;"
+				+ "        padding: 20px;"
+				+ "		   border: 1px solid #ddd;"
+				+ "        justify-content: space-between;"
+				+ "        align-items: center;}"
+				
+				+ "    .pagamento img{"
+				+ "     width:80px;"
+				+ "		height:110px;"
+				+ "     margin:10px;"
+				+ "}"
+				+ "		.pagamento label{"
+				+ "     margin-right:20px;"
+				+ "     font-weight:bold;}"
+				+ ""
+				+ "     .pagamento input[type=number]{"
+				+ "     margin-right:30px;"
+				+ "}"
+				+ "     .pagamento button{"
+				+ "     padding:10px;"
+				+ "     background-color:red;"
+				+ "     color:white;"
+				+ "     shadow: 1px black"
+				+ "     border:1px"
+				+ "     "
+				+ "}"
+				+ ".pagamento .pag{"
+				+ "text-decoration:none;"
+				+ "background-color:brown;"
+				+ "color:white;"
+				+ "padding:10px;"
 				+ "}"
 				+ "</style>\r\n"
+				
+				+ "<script>\r\n"
+				+ "        function subtotal(){\r\n"
+				+ "            var Preco = document.getElementById(\"preco\").innerText;\r\n"
+				+ "            var Qtd = document.getElementById(\"qtd\").value;\r\n"
+				+ "            document.getElementById(\"resultado\").innerText=Preco*Qtd;\r\n"
+				+ "        }\r\n"
+				+ "   "
+				+ "function redirecionar(){"
+				+ "      document.location.href=\"ServiceFinalizar?IDlivro="+request.getParameter("id")+"&qtd=\"+document.getElementById('qtd').value+\"&subtotal=\"+document.getElementById('resultado').innerText;"
+				+ "}"
+				+ " </script>"
+				
+				+ "</head>\r\n"
 				+ "<body>\r\n"
 				+ "    <header>\r\n"
 				+ "        <div id=\"areaUsuario\">\r\n"
@@ -239,16 +249,25 @@ public class Home extends HttpServlet {
 				+ "            <h3>Nossos Produtos</h3>\r\n"
 				+ "            <div id=\"listalivros\">\r\n"
 				;
+				String livroId = request.getParameter("id");
                 String conteudo="";
                 DAOlivro dlivro = new DAOlivro();
-                for(int i = 0; i <dlivro.listar().size(); i++) {
-                conteudo+="<a href =ServiceLivro?id="+dlivro.listar().get(i).getIDlivro()+">            <div class=\"livro\">\r\n"
-                +"                <img src="+dlivro.listar().get(i).getCAPAlivro()+" alt=\"\">\r\n"
-                +"                <h4>"+dlivro.listar().get(i).getTITULOlivro()+"</h4>\r\n"
-                +"                <p class=\"preco\"> R$ "+dlivro.listar().get(i).getPRECOlivro()+"</p>\r\n"
+                LIVRO liv = new LIVRO();
+                
+                liv.setIDlivro(Integer.parseInt(livroId));
+                
+                liv = dlivro.pesquisar(liv);
+   
+                conteudo+="<div class=\"pagamento\">\r\n"
+                +"                <img src="+liv.getCAPAlivro()+"> <h4>"+liv.getTITULOlivro()+"</h4>\r\n"
+                +"                <p class=\"preco\"> R$ <label id=preco>"+liv.getPRECOlivro()+"</label>"
+                		+ "Qtde:<input type= number value=1 max=5 min=1 id=qtd>"
+                		+ "Subtotal: R$ <label id=resultado>"+liv.getPRECOlivro()+"</label>"
+                		+ "<button id=calc onclick=subtotal()>Calcular</button></p>" 
+                +"				  <a href= javascript:void onclick=redirecionar() class=pag>Finalizar pagamento</a></div>\r\n"
                 +"            </div></a>\r\n"
                 ;
-                }
+                
                 pagina+=conteudo;     
 				pagina+="            </div>\r\n"
 				+ "    </content>\r\n"
@@ -285,4 +304,13 @@ public class Home extends HttpServlet {
 				+ "</html>";
 				response.getWriter().append(pagina);
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
+
+}

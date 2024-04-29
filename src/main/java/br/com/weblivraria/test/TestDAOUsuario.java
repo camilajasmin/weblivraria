@@ -34,20 +34,20 @@ public class TestDAOUsuario {
 
 	
 	
-//	@Test 
-//	public void testListar() {
-//		DAOUsuario daous = new DAOUsuario();
-//		List<USER> resultado = new ArrayList<USER>();
-//		assertEquals(resultado, daous.listar());
-//		
-//	}
-	
-	@Test
-	public void testalterarSenha() {
-		USER us = new USER();
-		us.setSENHAuser("12345");
-		us.setIDuser(2);
+	@Test 
+	public void testListar() {
 		DAOUsuario daous = new DAOUsuario();
-		assertEquals("Atualiazção realizada", daous.alterarSenha(us));
-	}
-}
+		List<USER> resultado = new ArrayList<USER>();
+		assertEquals(resultado, daous.listar());
+		
+	}}
+	
+//	@Test
+//	public void testalterarSenha() {
+//		USER us = new USER();
+//		us.setSENHAuser("12345");
+//		us.setIDuser(2);
+//		DAOUsuario daous = new DAOUsuario();
+//		assertEquals("Atualiazção realizada", daous.alterarSenha(us));
+//	}
+//}

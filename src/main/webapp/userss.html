@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários Cadastrados</title>
+    <style>
+        h1{
+            font-family: arial;
+            text-align: center;
+
+        }
+        h2{
+            font-size: 14px;
+        }
+        .dp img{
+            width: 16px;
+            height: 16px;
+        }
+        .dp {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+        .dc img{
+            height: 15px;
+            width: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .dc div{
+            font-size: 12px;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+
+        }
+       
+        .us {
+            background-color: lightpink;
+            padding: 10px;
+            border-radius: 10px;
+            height: 80px;
+            width: 250px;
+            transition: ease 0.5s;
+        }
+        .us:hover{
+            box-shadow: 0px 0px 5px black;
+        }
+        #estrutura{
+            width: 650px;
+            margin-top: 20px;
+            margin-left: 50px;
+            
+        }
+    </style>
+</head>
+<body>
+        <h1>Usuários Cadastrados</h1>
+        <div id="estrutura">
+
+            <div class="us">
+                <div class="dp">
+                    <img src="userIcon.png" alt="">
+                    <h2>Samantha Oliveira</h2>
+                    <a href="atualizar.html">
+                        <img src="editIcon.png" alt="">
+                    </a>
+                </div>
+                <div class="dc">
+                    <div><img src="phoneIcon.png" > (11)93833-9994</div>
+                    <div><img src="mail.png" > samantha.ssm@outlook.com</div>
+                </div>
+            </div>
+
+        </div>
+</body>
+</html>

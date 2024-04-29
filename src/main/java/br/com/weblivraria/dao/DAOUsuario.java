@@ -199,7 +199,7 @@ public class DAOUsuario extends Conexao implements CRUDUsuario<USER>{
 		
 		try{
 			if(abrirConexao()) {
-				String sql = "Select NOMEuser, SENHAuser, EMAILuser, CPFuser from USER where IDUser=?,SENHAuser=?,EMAILuser=?,CPFuser=?";
+				String sql = "Select NOMEuser, SENHAuser, EMAILuser, CPFuser from USER where NOMEuser=? or EMAILuser=? or CPFuser=? and SENHAuser=?";
 				pst = con.prepareStatement(sql);
 				pst.setString(1, dados.getNomeuser());
 				pst.setString(2, dados.getSENHAuser());
